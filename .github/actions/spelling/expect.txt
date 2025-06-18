@@ -146,6 +146,7 @@ JWTs
 kagi
 kagibot
 keikaku
+Keyfunc
 keypair
 KHTML
 kinda
