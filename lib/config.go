@@ -38,7 +38,7 @@ type Options struct {
 	PrivateKey           ed25519.PrivateKey
 	CookieExpiration     time.Duration
 	StripBasePrefix      bool
-  OpenGraph            config.OpenGraph
+	OpenGraph            config.OpenGraph
 	CookiePartitioned    bool
 	ServeRobotsTXT       bool
 	JWTRestrictionHeader string
