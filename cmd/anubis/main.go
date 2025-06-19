@@ -332,6 +332,15 @@ func main() {
 		slog.Warn("REDIRECT_DOMAINS is not set, Anubis will only redirect to the same domain a request is coming from, see https://anubis.techaro.lol/docs/admin/configuration/redirect-domains")
 	}
 
+	// If OpenGraph configuration values are not set in the config file, use the
+	// values from flags / envvars.
+	if !policy.OpenGraph.Enabled {
+		policy.OpenGraph.Enabled = *ogPassthrough
+		policy.OpenGraph.ConsiderHost = *ogCacheConsiderHost
+		policy.OpenGraph.TimeToLive = *ogTimeToLive
+		policy.OpenGraph.Override = map[string]string{}
+	}
+
 	s, err := libanubis.New(libanubis.Options{
 		BasePrefix:           *basePrefix,
 		StripBasePrefix:      *stripBasePrefix,
@@ -347,7 +356,6 @@ func main() {
 		RedirectDomains:      redirectDomainsList,
 		Target:               *target,
 		WebmasterEmail:       *webmasterEmail,
-		OGCacheConsidersHost: *ogCacheConsiderHost,
 		JWTRestrictionHeader: *jwtRestrictionHeader,
 	})
 	if err != nil {

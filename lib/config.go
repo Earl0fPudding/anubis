@@ -21,6 +21,7 @@ import (
 	"github.com/TecharoHQ/anubis/internal/ogtags"
 	"github.com/TecharoHQ/anubis/lib/challenge"
 	"github.com/TecharoHQ/anubis/lib/policy"
+	"github.com/TecharoHQ/anubis/lib/policy/config"
 	"github.com/TecharoHQ/anubis/web"
 	"github.com/TecharoHQ/anubis/xess"
 )
@@ -36,10 +37,8 @@ type Options struct {
 	RedirectDomains      []string
 	PrivateKey           ed25519.PrivateKey
 	CookieExpiration     time.Duration
-	OGTimeToLive         time.Duration
 	StripBasePrefix      bool
-	OGCacheConsidersHost bool
-	OGPassthrough        bool
+  OpenGraph            config.OpenGraph
 	CookiePartitioned    bool
 	ServeRobotsTXT       bool
 	JWTRestrictionHeader string
@@ -113,7 +112,7 @@ func New(opts Options) (*Server, error) {
 		policy:     opts.Policy,
 		opts:       opts,
 		DNSBLCache: decaymap.New[string, dnsbl.DroneBLResponse](),
-		OGTags:     ogtags.NewOGTagCache(opts.Target, opts.OGPassthrough, opts.OGTimeToLive, opts.OGCacheConsidersHost),
+		OGTags:     ogtags.NewOGTagCache(opts.Target, opts.Policy.OpenGraph),
 		cookieName: cookieName,
 	}
 

@@ -11,7 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Replace cidranger with bart for IP range checking, improving IP matching performance by 3-20x with zero heap 
+- Move Open Graph configuration [to the policy file](./admin/configuration/open-graph.mdx)
+- Enable support for default Open Graph metadata
+- Replace cidranger with bart for IP range checking, improving IP matching performance by 3-20x with zero heap
   allocations
 - Remove the unused `/test-error` endpoint and update the testing endpoint `/make-challenge` to only be enabled in
   development
@@ -20,13 +22,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactor challenge presentation logic to use a challenge registry
 - Allow challenge implementations to register HTTP routes
 - Implement a no-JS challenge method: [`metarefresh`](./admin/configuration/challenges/metarefresh.mdx) ([#95](https://github.com/TecharoHQ/anubis/issues/95))
-- Bump AI-robots.txt to version 1.34
+- Bump AI-robots.txt to version 1.37
 - Make progress bar styling more compatible (UXP, etc)
 - Optimized the OGTags subsystem with reduced allocations and runtime per request by up to 66%
 - Add `--strip-base-prefix` flag/envvar to strip the base prefix from request paths when forwarding to target servers
 - Add `robots2policy` CLI utility to convert robots.txt files to Anubis challenge policies using CEL expressions ([#409](https://github.com/TecharoHQ/anubis/issues/409))
 - Implement GeoIP and ASN based checks via [Thoth](https://anubis.techaro.lol/docs/admin/thoth) ([#206](https://github.com/TecharoHQ/anubis/issues/206))
 - Replace internal SHA256 hashing with xxhash for 4-6x performance improvement in policy evaluation and cache operations
+- Add [custom weight thresholds](./admin/configuration/thresholds.mdx) via CEL ([#688](https://github.com/TecharoHQ/anubis/pull/688))
 - Add optional restrictions for JWT based on the value of a header ([#697](https://github.com/TecharoHQ/anubis/pull/697))
 
 ## v1.19.1: Jenomis cen Lexentale - Echo 1
