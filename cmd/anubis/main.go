@@ -351,8 +351,6 @@ func main() {
 		CookieDomain:         *cookieDomain,
 		CookieExpiration:     *cookieExpiration,
 		CookiePartitioned:    *cookiePartitioned,
-		OGPassthrough:        *ogPassthrough,
-		OGTimeToLive:         *ogTimeToLive,
 		RedirectDomains:      redirectDomainsList,
 		Target:               *target,
 		WebmasterEmail:       *webmasterEmail,
