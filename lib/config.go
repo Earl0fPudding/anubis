@@ -43,6 +43,7 @@ type Options struct {
 	OGPassthrough        bool
 	CookiePartitioned    bool
 	ServeRobotsTXT       bool
+	JWTRestrictionHeader string
 }
 
 func LoadPoliciesOrDefault(ctx context.Context, fname string, defaultDifficulty int) (*policy.ParsedConfig, error) {
