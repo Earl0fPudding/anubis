@@ -1,29 +1,37 @@
 :root {
-  --body-sans-font: Geist, sans-serif;
-  --body-preformatted-font: Iosevka Curly Iaso, monospace;
-  --body-title-font: Podkova, serif;
+  --body-sans-font: Fira Sans Condensed, sans-serif;
+  --body-preformatted-font: Fira Sans Condensed, monospace;
+  --body-title-font: Fira Sans Condensed, serif;
 
-  --background: #1d2021;
-  --text: #f9f5d7;
-  --text-selection: #d3869b;
-  --preformatted-background: #3c3836;
-  --link-foreground: #b16286;
-  --link-background: #282828;
-  --blockquote-border-left: 1px solid #bdae93;
+  --background: #ffffff;
+  --text: #282426;
+  --text-selection: #ea5b0c;
+  --preformatted-background: #ffffff;
+  --link-foreground: #ea5b0c;
+  --link-background: #ffffff;
+  --blockquote-border-left: 1px solid #000000;
 
-  --progress-bar-outline: #b16286 solid 4px;
-  --progress-bar-fill: #b16286;
+  --progress-bar-outline: #ea5b0c solid 4px;
+  --progress-bar-fill: #ea5b0c;
 }
 @media (prefers-color-scheme: light) {
   :root {
-    --background: #f9f5d7;
-    --text: #1d2021;
-    --text-selection: #d3869b;
-    --preformatted-background: #ebdbb2;
-    --link-foreground: #b16286;
-    --link-background: #fbf1c7;
-    --blockquote-border-left: 1px solid #655c54;
+    --background: #ffffff;
+    --text: #282426;
+    --text-selection: #ea5b0c;
+    --preformatted-background: #ffffff;
+    --link-foreground: #ea5b0c;
+    --link-background: #ffffff;
+    --blockquote-border-left: 1px solid #000000;
   }
+}
+
+@font-face {
+  font-family: "Fira Sans Condensed";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./static/FiraSansCondensed-Regular.woff2") format("woff2");
 }
 
 @font-face {
