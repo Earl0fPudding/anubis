@@ -47,6 +47,7 @@ var (
 	challengeDifficulty      = flag.Int("difficulty", anubis.DefaultDifficulty, "difficulty of the challenge")
 	cookieDomain             = flag.String("cookie-domain", "", "if set, the top-level domain that the Anubis cookie will be valid for")
 	cookieDynamicDomain      = flag.Bool("cookie-dynamic-domain", false, "if set, automatically set the cookie Domain value based on the request domain")
+	cookiePrefix             = flag.String("cookie-prefix", "techaro.lol-anubis", "prefix for the cookie names which are being set by anubis")
 	cookieExpiration         = flag.Duration("cookie-expiration-time", anubis.CookieDefaultExpirationTime, "The amount of time the authorization cookie is valid for")
 	cookiePartitioned        = flag.Bool("cookie-partitioned", false, "if true, sets the partitioned flag on Anubis cookies, enabling CHIPS support")
 	hs512Secret              = flag.String("hs512-secret", "", "secret used to sign JWTs, uses ed25519 if not set")
@@ -361,6 +362,7 @@ func main() {
 		CookieDomain:      *cookieDomain,
 		CookieExpiration:  *cookieExpiration,
 		CookiePartitioned: *cookiePartitioned,
+		CookiePrefix:      *cookiePrefix,
 		RedirectDomains:   redirectDomainsList,
 		Target:            *target,
 		WebmasterEmail:    *webmasterEmail,

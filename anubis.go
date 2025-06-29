@@ -9,14 +9,7 @@ import "time"
 // it defaults to "devel".
 var Version = "devel"
 
-// CookieName is the name of the cookie that Anubis uses in order to validate
-// access.
-const CookieName = "techaro.lol-anubis-auth"
-
-// WithDomainCookieName is the name that is prepended to the per-domain cookie used when COOKIE_DOMAIN is set.
-const WithDomainCookieName = "techaro.lol-anubis-auth-for-"
-
-const TestCookieName = "techaro.lol-anubis-cookie-test-if-you-block-this-anubis-wont-work"
+var TestCookieName = ""
 
 // CookieDefaultExpirationTime is the amount of time before the cookie/JWT expires.
 const CookieDefaultExpirationTime = 7 * 24 * time.Hour

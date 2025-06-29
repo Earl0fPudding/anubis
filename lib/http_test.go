@@ -3,8 +3,6 @@ package lib
 import (
 	"net/http/httptest"
 	"testing"
-
-	"github.com/TecharoHQ/anubis"
 )
 
 func TestSetCookie(t *testing.T) {
@@ -18,19 +16,19 @@ func TestSetCookie(t *testing.T) {
 			name:       "basic",
 			options:    Options{},
 			host:       "",
-			cookieName: anubis.CookieName,
+			cookieName: "techaro.lol-anubis-auth",
 		},
 		{
 			name:       "domain techaro.lol",
 			options:    Options{CookieDomain: "techaro.lol"},
 			host:       "",
-			cookieName: anubis.WithDomainCookieName + "techaro.lol",
+			cookieName: "techaro.lol-anubis-auth-for-techaro.lol",
 		},
 		{
 			name:       "dynamic cookie domain",
 			options:    Options{CookieDynamicDomain: true},
 			host:       "techaro.lol",
-			cookieName: anubis.WithDomainCookieName + "techaro.lol",
+			cookieName: "techaro.lol-anubis-auth-for-techaro.lol",
 		},
 	} {
 		t.Run(tt.name, func(t *testing.T) {
@@ -67,8 +65,8 @@ func TestClearCookie(t *testing.T) {
 
 	ckie := cookies[0]
 
-	if ckie.Name != anubis.CookieName {
-		t.Errorf("wanted cookie named %q, got cookie named %q", anubis.CookieName, ckie.Name)
+	if ckie.Name != "techaro.lol-anubis-auth" {
+		t.Errorf("wanted cookie named %q, got cookie named %q", "techaro.lol-anubis-auth", ckie.Name)
 	}
 
 	if ckie.MaxAge != -1 {
@@ -117,7 +115,7 @@ func TestClearCookieWithDynamicDomain(t *testing.T) {
 
 	ckie := cookies[0]
 
-	if ckie.Name != anubis.WithDomainCookieName+"xeiaso.net" {
+	if ckie.Name != "techaro.lol-anubis-auth-for-xeiaso.net" {
 		t.Errorf("wanted cookie named %q, got cookie named %q", srv.cookieName, ckie.Name)
 	}
 

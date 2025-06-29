@@ -34,8 +34,8 @@ type Options struct {
 	CookieDynamicDomain bool
 	CookieDomain        string
 	CookieExpiration    time.Duration
-	CookieName          string
 	CookiePartitioned   bool
+	CookiePrefix        string
 	BasePrefix          string
 	WebmasterEmail      string
 	RedirectDomains     []string
@@ -101,11 +101,13 @@ func New(opts Options) (*Server, error) {
 
 	anubis.BasePrefix = opts.BasePrefix
 
-	cookieName := anubis.CookieName
+	cookieName := opts.CookiePrefix + "-auth"
 
 	if opts.CookieDomain != "" {
-		cookieName = anubis.WithDomainCookieName + opts.CookieDomain
+		cookieName = opts.CookiePrefix + "-auth-for-" + opts.CookieDomain
 	}
+	
+	anubis.TestCookieName = opts.CookiePrefix + "-do-not-block"
 
 	result := &Server{
 		next:        opts.Next,

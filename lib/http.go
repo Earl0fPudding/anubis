@@ -2,6 +2,7 @@ package lib
 
 import (
 	"fmt"
+	"github.com/TecharoHQ/anubis"
 	"math/rand"
 	"net/http"
 	"regexp"
@@ -9,7 +10,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/TecharoHQ/anubis"
 	"github.com/TecharoHQ/anubis/internal"
 	"github.com/TecharoHQ/anubis/lib/challenge"
 	"github.com/TecharoHQ/anubis/lib/policy"
@@ -26,7 +26,7 @@ func (s *Server) SetCookie(w http.ResponseWriter, name, value, path, host string
 	if s.opts.CookieDynamicDomain && domainMatchRegexp.MatchString(host) {
 		if etld, err := publicsuffix.EffectiveTLDPlusOne(host); err == nil {
 			domain = etld
-			name = anubis.WithDomainCookieName + etld
+			name = s.opts.CookiePrefix + "-auth"
 		}
 	}
 
@@ -46,7 +46,7 @@ func (s *Server) ClearCookie(w http.ResponseWriter, name, path, host string) {
 	if s.opts.CookieDynamicDomain && domainMatchRegexp.MatchString(host) {
 		if etld, err := publicsuffix.EffectiveTLDPlusOne(host); err == nil {
 			domain = etld
-			name = anubis.WithDomainCookieName + etld
+			name = s.opts.CookiePrefix + "-auth"
 		}
 	}
 

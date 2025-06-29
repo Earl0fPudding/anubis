@@ -402,7 +402,7 @@ func TestPlaywrightWithBasePrefix(t *testing.T) {
 
 			var found bool
 			for _, cookie := range cookies {
-				if cookie.Name == anubis.CookieName {
+				if cookie.Name == "techaro.lol-anubis-auth" {
 					found = true
 					if cookie.Path != basePrefix+"/" {
 						t.Errorf("cookie path is wrong, wanted %s, got: %s", basePrefix+"/", cookie.Path)
@@ -412,7 +412,7 @@ func TestPlaywrightWithBasePrefix(t *testing.T) {
 			}
 
 			if !found {
-				t.Errorf("Cookie %q not found", anubis.CookieName)
+				t.Errorf("Cookie %q not found", "techaro.lol-anubis-auth")
 			}
 		})
 	}
