@@ -101,7 +101,11 @@ templ index(localizer *localization.SimpleLocalizer) {
 		</div>
 		<details>
 			<summary>{ localizer.T("why_am_i_seeing") }</summary>
-		    if anubis.CustomExplanationText == "" {
+		    if anubis.UseSimplifiedExplanation {
+            <p>
+                { localizer.T("simplified_explanation") }
+            </p>
+		    } else {
 			<p>
 				{ localizer.T("ai_companies_explanation") }
 			</p>
@@ -113,10 +117,6 @@ templ index(localizer *localization.SimpleLocalizer) {
 			</p>
 			<p>
 				{ localizer.T("jshelter_note") }
-			</p>
-			} else {
-			<p>
-			    { anubis.CustomExplanationText }
 			</p>
 			}
 			<p>{ localizer.T("version_info") } <code>{ anubis.Version }</code>.</p>
