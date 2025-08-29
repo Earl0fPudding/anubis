@@ -203,7 +203,7 @@ func index() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "\"></script><div id=\"progress\" role=\"progressbar\" aria-labelledby=\"status\"><div class=\"bar-inner\"></div></div><details><summary>Why am I seeing this?</summary><p>This is a measure against bots and malicious patience  similar to a CAPTCHA. Your browser is given a calculation task that it has to solve to ensure that it is a valid client. The concept is called <a href=\"https://en.wikipedia.org/wiki/Proof_of_work\">Proof of Work.</a> The task is calculated in a few seconds and you are granted access to the website. Thank you for your understanding.</p></details><noscript><p>You must enable JavaScript to get past this challenge.</p></noscript><div id=\"testarea\"></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "\"></script><div id=\"progress\" role=\"progressbar\" aria-labelledby=\"status\"><div class=\"bar-inner\"></div></div><details><summary>Why am I seeing this?</summary><p>This is a measure against bots and malicious requests similar to a CAPTCHA. Your browser is given a calculation task that it has to solve to ensure that it is a valid client. The concept is called <a href=\"https://en.wikipedia.org/wiki/Proof_of_work\">Proof of Work.</a> The task is calculated in a few seconds and you are granted access to the website. Thank you for your understanding.</p></details><noscript><p>You must enable JavaScript to get past this challenge.</p></noscript><div id=\"testarea\"></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

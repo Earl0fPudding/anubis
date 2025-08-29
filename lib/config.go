@@ -44,6 +44,7 @@ type Options struct {
 	CookiePartitioned    bool
 	ServeRobotsTXT       bool
 	JWTRestrictionHeader string
+	DifficultyInJWT      bool
 }
 
 func LoadPoliciesOrDefault(ctx context.Context, fname string, defaultDifficulty int) (*policy.ParsedConfig, error) {
