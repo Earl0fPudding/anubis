@@ -1,0 +1,98 @@
+# HAProxy
+
+To use Anubis with HAProxy, you have two variants:
+  - simple - stick Anubis between HAProxy and your application backend (simple)
+    - perfect if you only have a single application in general
+  - advanced - force Anubis challenge by default and route to the application backend by HAProxy if the challenge is correct
+    - useful for complex setups
+    - routing can be done in HAProxy
+    - define ACLs in HAProxy for domains, paths etc which are required/excluded regarding Anubis
+    - HAProxy 3.0 recommended
+
+## Simple Variant
+
+```mermaid
+---
+title: HAProxy with simple config
+---
+flowchart LR
+    T(User Traffic)
+    HAProxy(HAProxy Port 80/443)
+    Anubis
+    Application
+
+    T --> HAProxy
+    HAProxy --> Anubis
+    Anubis --> |Happy Traffic| Application
+```
+
+
+Your Anubis env file configuration may look like this:
+
+import simpleAnubis from "!!raw-loader!./haproxy/simple-config.env";
+
+<CodeBlock language="bash">{simpleAnubis}</CodeBlock>
+
+The important part is that `TARGET` points to your actual application and if Anubis and HAProxy are on the same machine, a UNIX socket can be used.
+
+Your frontend and backend configuration of HAProxy may looke like the following:
+
+import simpleHAProxy from "!!raw-loader!./haproxy/simple-haproxy.cfg";
+
+<CodeBlock language="bash">{simpleHAProxy}</CodeBlock>
+
+This simply enables SSL offloading, sets some useful and required headers and routes to Anubis directly.
+
+## Advanced Variant
+
+:::note
+
+For a better JWT decoding performance, it's recommended to use HAProxy version 3.0 or above.
+
+:::
+
+Your Anubis env file configuration may look like this:
+
+import advancedAnubis from "!!raw-loader!./haproxy/advanced-config.env";
+
+<CodeBlock language="bash">{advancedAnubis}</CodeBlock>
+
+It's important to use `HS512_SECRET` which HAProxy understands.
+
+You can set Anubis to force a challenge for every request using the following policy file:
+
+import advancedAnubisPolicy from "!!raw-loader!./haproxy/advanced-config-policy.yml";
+
+<CodeBlock language="bash">{advancedAnubisPolicy}</CodeBlock>
+
+The HAProxy config file may look like this:
+
+import advancedHAProxy from "!!raw-loader!./haproxy/advanced-haproxy.cfg";
+
+<CodeBlock language="bash">{advancedHAProxy}</CodeBlock>
+
+
+
+```mermaid
+---
+title: HAProxy with advanced config
+---
+
+flowchart LR
+    T(User Traffic)
+    HAProxy(HAProxy Port 80/443)
+    B1(App1)
+    B2(App2)
+    B3(App3)
+    Anubis
+
+    T --> HAProxy
+    HAProxy --> |Valid challenge traffic| B1
+    HAProxy --> |Valid challenge traffic| B2
+    HAProxy --> |Any traffic| B3
+    HAProxy --> | Traffic for app1 and app2 without valid challenge| Anubis
+```
+
+Instead of your traffic going directly to your backend, it takes a detour through Anubis. Anubis filters out the "bad" traffic and passes the "good" traffic to the backend.
+
+To set up Anubi
