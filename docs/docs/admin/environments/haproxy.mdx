@@ -80,7 +80,7 @@ import advancedAnubis from "!!raw-loader!./haproxy/advanced-config.env";
 
 <CodeBlock language="bash">{advancedAnubis}</CodeBlock>
 
-It's important to use `HS512_SECRET` which HAProxy understands. Please replace `<SECRET-HERE>` with your own secret string (128 characters recommended).
+It's important to use `HS512_SECRET` which HAProxy understands. Please replace `<SECRET-HERE>` with your own secret string (alphanumerical string with 128 characters recommended).
 
 You can set Anubis to force a challenge for every request using the following policy file:
 
@@ -94,4 +94,4 @@ import advancedHAProxy from "!!raw-loader!./haproxy/advanced-haproxy.cfg";
 
 <CodeBlock language="haproxy">{advancedHAProxy}</CodeBlock>
 
-Please replace `<SECRET-HERE>` with your own secret string (128 characters recommended).
+Please replace `<SECRET-HERE>` with the same secret from the Anubis config.
