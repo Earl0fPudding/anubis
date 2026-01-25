@@ -26,7 +26,6 @@ flowchart LR
     Anubis --> |Happy Traffic| Application
 ```
 
-
 Your Anubis env file configuration may look like this:
 
 import simpleAnubis from "!!raw-loader!./haproxy/simple-config.env";
@@ -45,34 +44,6 @@ This simply enables SSL offloading, sets some useful and required headers and ro
 
 ## Advanced Variant
 
-:::note
-
-For a better JWT decoding performance, it's recommended to use HAProxy version 3.0 or above.
-
-:::
-
-Your Anubis env file configuration may look like this:
-
-import advancedAnubis from "!!raw-loader!./haproxy/advanced-config.env";
-
-<CodeBlock language="bash">{advancedAnubis}</CodeBlock>
-
-It's important to use `HS512_SECRET` which HAProxy understands.
-
-You can set Anubis to force a challenge for every request using the following policy file:
-
-import advancedAnubisPolicy from "!!raw-loader!./haproxy/advanced-config-policy.yml";
-
-<CodeBlock language="bash">{advancedAnubisPolicy}</CodeBlock>
-
-The HAProxy config file may look like this:
-
-import advancedHAProxy from "!!raw-loader!./haproxy/advanced-haproxy.cfg";
-
-<CodeBlock language="bash">{advancedHAProxy}</CodeBlock>
-
-
-
 ```mermaid
 ---
 title: HAProxy with advanced config
@@ -87,12 +58,38 @@ flowchart LR
     Anubis
 
     T --> HAProxy
-    HAProxy --> |Valid challenge traffic| B1
-    HAProxy --> |Valid challenge traffic| B2
-    HAProxy --> |Any traffic| B3
-    HAProxy --> | Traffic for app1 and app2 without valid challenge| Anubis
+    HAProxy --> |Traffic for App1 and App2 without valid challenge| Anubis
+    HAProxy --> |app1.example.com | B1
+    HAProxy --> |app2.example.com| B2
+    HAProxy --> |app3.example.com| B3
 ```
 
-Instead of your traffic going directly to your backend, it takes a detour through Anubis. Anubis filters out the "bad" traffic and passes the "good" traffic to the backend.
+:::note
 
-To set up Anubi
+For an improved JWT decoding performance, it's recommended to use HAProxy version 3.0 or above.
+
+:::
+
+Your Anubis env file configuration may look like this:
+
+import advancedAnubis from "!!raw-loader!./haproxy/advanced-config.env";
+
+<CodeBlock language="bash">{advancedAnubis}</CodeBlock>
+
+It's important to use `HS512_SECRET` which HAProxy understands. Please replace `<SECRET-HERE>` with your own secret string (128 characters recommended).
+
+You can set Anubis to force a challenge for every request using the following policy file:
+
+import advancedAnubisPolicy from "!!raw-loader!./haproxy/advanced-config-policy.yml";
+
+<CodeBlock language="yaml">{advancedAnubisPolicy}</CodeBlock>
+
+The HAProxy config file may look like this:
+
+import advancedHAProxy from "!!raw-loader!./haproxy/advanced-haproxy.cfg";
+
+<CodeBlock language="haproxy">{advancedHAProxy}</CodeBlock>
+
+Please replace `<SECRET-HERE>` with your own secret string (128 characters recommended).
+
+Explanation: In this example are three applications behind one HAProxy frontend. Only App1 and App2 are secured via Anubis, App3 is open for everyone. The path `/excluded/path` can also be accessed by anyone.
