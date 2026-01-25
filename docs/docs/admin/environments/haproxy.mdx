@@ -44,6 +44,10 @@ This simply enables SSL offloading, sets some useful and required headers and ro
 
 ## Advanced Variant
 
+Due to the fact that HAProxy can decode JWT, we are able to verify the Anubis token directly in HAProxy and route the traffic to the specific backends ourselves.
+
+In this example are three applications behind one HAProxy frontend. Only App1 and App2 are secured via Anubis; App3 is open for everyone. The path `/excluded/path` can also be accessed by anyone.
+
 ```mermaid
 ---
 title: HAProxy with advanced config
@@ -91,5 +95,3 @@ import advancedHAProxy from "!!raw-loader!./haproxy/advanced-haproxy.cfg";
 <CodeBlock language="haproxy">{advancedHAProxy}</CodeBlock>
 
 Please replace `<SECRET-HERE>` with your own secret string (128 characters recommended).
-
-Explanation: In this example are three applications behind one HAProxy frontend. Only App1 and App2 are secured via Anubis, App3 is open for everyone. The path `/excluded/path` can also be accessed by anyone.
